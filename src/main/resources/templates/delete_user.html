@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remove User?</title>
+</head>
+<body>
+    <table>
+        <tbody>
+        <tr th:each="user:${delete}">
+            <td th:text="'Remove user?'"></td>
+            <td>
+                <div>
+                    <form th:action="@{/admin/user/delete/YES}">
+                        <input type="hidden" name="id" th:value="${user.id}"/>
+                        <input type="submit" value="YES"/>
+                    </form>
+                    <form th:action="@{/admin/list_users}">
+                        <input type="submit" value="NO"/>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+</body>
+</html>

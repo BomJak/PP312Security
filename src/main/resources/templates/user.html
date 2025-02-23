@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Spring Security Example</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Login</th>
+            <th>First Name</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${user}">
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getUserFirstname()}"></td>
+            <td th:text="${user.getAge()}">
+            <td>
+                <ul>
+                    <li th:each="user : ${user}" th:text="${user.getAuthorities()}"></li>
+                </ul>
+            </td>
+            <td>
+                <div>
+                    <form th:method="get" th:action="@{/logout}">
+                        <input type="submit" value="Log out" class="update-button">
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-
+<div>
+    <form th:action="@{/admin/list_users}">
+        <input type="submit" value="Back">
+    </form>
+</div>
 </body>
 </html>

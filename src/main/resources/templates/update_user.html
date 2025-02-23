@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UpdatePage</title>
+</head>
+<body>
+<div th:each="user : ${up_user}">
+    <form th:method="POST" th:action="@{/admin/user/edit}" th:object="${up_user}">
+        <input type="hidden" name="id" th:value="${user.id}">
+        <label for="username">Name</label>
+        <input type="text" th:field="*{username}" id="username">
+        <br/>
+
+        <label for="userFirstname">First Name</label>
+        <input type="text" th:field="*{userFirstname}" id="userFirstname">
+        <br>
+
+        <label for="age">Age</label>
+        <input type="number" min="0" th:field="*{age}" id="age">
+        <br>
+
+        <label for="password">Password</label>
+        <input type="password" th:field="*{password}" id="password">
+        <br>
+
+
+        <div th:each="roles : ${update_role}">
+            <label>
+                <input type="checkbox" th:value="${roles.id}" th:text="${roles.role}" name="role">
+            </label>
+        </div>
+
+        <input type="submit" value="Create">
+    </form>
+</div>
+
+<div>
+    <form th:action="@{/admin/list_users}">
+        <input type="submit" value="Back">
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+</head>
+<body>
+<div>
+    <form th:method="POST" th:action="@{/admin}" th:object="${addUser}">
+        <label for="username">Login</label>
+        <input type="text" th:field="*{username}" id="username">
+        <br/>
+
+        <label for="userFirstname">First Name</label>
+        <input type="text" th:field="*{userFirstname}" id="userFirstname">
+        <br>
+
+        <label for="age">Age</label>
+        <input type="number" min="0" th:field="*{age}" id="age">
+        <br>
+
+        <label for="password">Password</label>
+        <input type="password" th:field="*{password}" id="password">
+        <br>
+
+        <form method="POST" th:action="@{/admin}" th:object="${newUser}">
+            <div th:each="roles : ${list_role}">
+                <label>
+                    <input type="checkbox" th:value="${roles.id}" th:text="${roles.role}" name="roles">
+                </label>
+            </div>
+
+            <input type="submit" value="Create">
+        </form>
+    </form>
+</div>
+<div>
+    <form th:action="@{/admin/list_users}">
+        <input type="submit" value="Back">
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>First Name</th>
+            <th>Role</th>
+            <th>Action</th>
+            <th>Action</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${get_user}">
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getUserFirstname()}"></td>
+            <td>
+                <ul>
+                    <li th:text="${user.getAuthorities()}"></li>
+                </ul>
+            </td>
+            <td>
+                <div class="buttons-container">
+                    <form action="/admin/user/update">
+                        <input type="hidden" name="id" th:value="${user.id}">
+                        <input type="hidden" name="role" th:value="${user.getAuthorities()}">
+                        <input type="submit" value="Update" class="update-button">
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div class="buttons-container">
+                    <form action="/admin/user/delete">
+                        <input type="hidden" name="id" th:value="${user.id}">
+                        <input type="submit" value="Delete" class="delete-button">
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div class="buttons-container">
+                    <form action="/admin/user">
+                        <input type="hidden" name="id" th:value="${user.id}">
+                        <input type="submit" value="User page" class="update-button">
+                    </form>
+                </div>
+            </td>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+    <form th:action="@{/admin/user/new}">
+        <br/>
+        <br/>
+        <input type="submit" value="Create New User" class="update-button">
+    </form>
+
+
+</div>
+<div>
+    <form th:method="get" th:action="@{/logout}">
+        <input type="submit" value="Exit" class="update-button">
+    </form>
+</div>
+</body>
+</html>
